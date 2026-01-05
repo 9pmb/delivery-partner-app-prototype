@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Partner App - Ultra Modern</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="app-container">
+
+        <!-- MAP BACKGROUND (Always visible behind screens) -->
+        <div class="map-layer" id="main-map"></div>
+        <div class="pulse-ring" id="pulse-ring"></div>
+
+        <!-- LOGIN SCREEN -->
+        <section id="login-screen" class="screen">
+            <h1 class="brand-title">Flash<br>Delivery</h1>
+            <input type="text" class="login-input" placeholder="Phone Number" value="9876543210">
+            <button class="btn-primary" id="login-btn">START DRIVING</button>
+        </section>
+
+        <!-- DASHBOARD (Floating UI over Map) -->
+        <section id="home-screen" class="screen hidden">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="status-toggle-fab" id="status-toggle">
+                    <span>⚡</span>
+                </div>
+                <!-- Earnings Pill (Clickable) -->
+                <div class="earnings-pill" id="open-wallet-btn" style="cursor: pointer;">
+                    <span class="pill-value">₹<span id="dash-earnings">850</span></span>
+                </div>
+            </div>
+
+            <!-- Bottom Sheet -->
+            <div class="bottom-sheet show" id="dash-sheet">
+
+                <!-- Offline View -->
+                <div id="view-offline">
+                    <p class="go-online-text">You're Offline</p>
+                    <p class="offline-msg">Go online to start receiving delivery requests nearby.</p>
+                </div>
+
+                <!-- Online/Orders View -->
+                <div id="view-online" class="hidden">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
+                        <h3 style="color:var(--text-white);">Nearby Requests (1)</h3>
+                        <span style="font-size:12px; color:var(--primary);">Best Match</span>
+                    </div>
+
+                    <!-- Single Order Card (Mock) -->
+                    <div class="order-item" id="order-card-trigger">
+                        <div class="oi-left">
+                            <h4>Burger King</h4>
+                            <p>2 items • 3.2km</p>
+                        </div>
+                        <div class="oi-right">
+                            <div class="oi-price">₹85</div>
+                            <div class="oi-dist">15m</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WALLET SCREEN (Modal) -->
+        <section id="wallet-screen" class="screen hidden"
+            style="background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);">
+            <div class="wallet-panel">
+                <div class="wallet-header">
+                    <h2>Wallet</h2>
+                    <button class="close-btn" id="close-wallet-btn">✕</button>
+                </div>
+
+                <div class="balance-card">
+                    <p>Total Balance</p>
+                    <h1 class="money">₹<span id="wallet-balance">850</span></h1>
+                    <button class="btn-primary" id="withdraw-btn"
+                        style="margin-top: 20px; font-size: 14px; padding: 12px;">WITHDRAW</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <p>Today</p>
+                        <h3 class="money">₹<span id="stat-today">0</span></h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>Yesterday</p>
+                        <h3 class="money">₹<span id="stat-yesterday">450</span></h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>This Week</p>
+                        <h3 class="money">₹<span id="stat-week">3,200</span></h3>
+                    </div>
+                </div>
+
+                <div class="withdraw-confirm hidden" id="withdraw-form">
+                    <h3>Withdraw Funds</h3>
+                    <input type="number" id="withdraw-amount" class="login-input" placeholder="Enter Amount"
+                        style="margin: 15px 0;">
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-primary" id="confirm-withdraw">Confirm</button>
+                        <button class="btn-primary" id="cancel-withdraw"
+                            style="background:#444; color:white;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORDER FLOW (Full Screen Overlay) -->
+        <section id="order-overlay" class="screen hidden">
+            <div class="overlay-map">
+                <!-- Mock Map Markers -->
+                <div class="map-marker" style="top:30%; left:40%;">🏠</div>
+                <div class="map-marker" style="top:50%; left:60%;">🍔</div>
+            </div>
+
+            <div class="overlay-panel">
+                <div class="customer-info">
+                    <div class="avatar">👤</div>
+                    <div class="cust-details">
+                        <h2 id="flow-title">Go to Burger King</h2>
+                        <p id="flow-address">Sector 18, Noida</p>
+                    </div>
+                </div>
+
+                <!-- Swipe Button -->
+                <div class="swipe-container" id="swipe-btn">
+                    <div class="swipe-bg" id="swipe-bg"></div>
+                    <div class="swipe-text" id="swipe-text">SWIPE TO ARRIVE</div>
+                    <div class="swipe-handle" id="swipe-handle">➜</div>
+                </div>
+
+                <button class="btn-primary hidden" id="reset-btn"
+                    style="margin-top:20px; background:#333; color:#fff;">Done</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
